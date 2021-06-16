@@ -1,0 +1,53 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: simple-security
+  labels:
+    app: simple-security
+spec:
+  selector:
+    app: simple-security
+  ports:
+  - port: 8880
+    nodePort: 30880
+    protocol: TCP
+  type: NodePort
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: simple-security
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+        app: simple-security
+  template:
+    metadata:
+      labels:
+        app: simple-security
+    spec:
+      containers:
+      - name: simple-security
+        image: thaiduongngo/simple-security:0.19c
+        ports:
+        - containerPort: 8880
+        env:
+        - name: SPRING_PROFILES_ACTIVE
+          value: "dev"
+        - name: MONGO_HOST
+          value: "mongo"
+        - name: MONGO_PORT
+          value: "27017"
+        - name: MONGO_USERNAME
+          value: "admin"
+        - name: MONGO_PASSWORD
+          value: "admin"
+        - name: KAFKA_BOOTSTRAP_HOST
+          value: "simple-kafka"
+        - name: KAFKA_BOOTSTRAP_PORT
+          value: "9092"
+        - name: SEC_APP_ISSUER
+          value: "com.github.thaiduong"
+        - name: SEC_APP_SECRET
+          value: "%KgaW3?*nRmjcTMP_r6_kXT+g-4qW?CfwFRW%v%RSx4s@dkd2HEuvqPsuW^N*rJbbxLewy?kA&!pN@DH9a7Q$&z4gm-!4TcNjFp2wJe2S82MbWvDb6tjd#JMg^B38bhm"

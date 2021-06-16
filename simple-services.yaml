@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: simple-query
+  labels:
+    app: simple-query
+spec:
+  selector:
+    app: simple-query
+  ports:
+  - port: 8881
+    nodePort: 30881
+    protocol: TCP
+  type: NodePort
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: simple-ticket
+  labels:
+    app: simple-ticket
+spec:
+  selector:
+    app: simple-ticket
+  ports:
+  - port: 8882
+    nodePort: 30882
+    protocol: TCP
+  type: NodePort
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: simple-comment
+  labels:
+    app: simple-comment
+spec:
+  selector:
+    app: simple-comment
+  ports:
+  - port: 8883
+    nodePort: 30883
+    protocol: TCP
+  type: NodePort
+

@@ -1,0 +1,116 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: simple-query
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+        app: simple-query
+  template:
+    metadata:
+      labels:
+        app: simple-query
+    spec:
+      containers:
+      - name: simple-query
+        image: thaiduongngo/simple-query:0.19e
+        ports:
+        - containerPort: 8881
+        env:
+        - name: SPRING_PROFILES_ACTIVE
+          value: "dev"
+        - name: MONGO_HOST
+          value: "mongo"
+        - name: MONGO_PORT
+          value: "27017"
+        - name: MONGO_USERNAME
+          value: "admin"
+        - name: MONGO_PASSWORD
+          value: "admin"
+        - name: KAFKA_BOOTSTRAP_HOST
+          value: "simple-kafka"
+        - name: KAFKA_BOOTSTRAP_PORT
+          value: "9092"
+        - name: SEC_APP_ISSUER
+          value: "com.github.thaiduong"
+        - name: SEC_APP_SECRET
+          value: "%KgaW3?*nRmjcTMP_r6_kXT+g-4qW?CfwFRW%v%RSx4s@dkd2HEuvqPsuW^N*rJbbxLewy?kA&!pN@DH9a7Q$&z4gm-!4TcNjFp2wJe2S82MbWvDb6tjd#JMg^B38bhm"
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: simple-ticket
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+        app: simple-ticket
+  template:
+    metadata:
+      labels:
+        app: simple-ticket
+    spec:
+      containers:
+      - name: simple-ticket
+        image: thaiduongngo/simple-ticket:0.19c
+        ports:
+        - containerPort: 8882
+        env:
+        - name: SPRING_PROFILES_ACTIVE
+          value: "dev"
+        - name: MONGO_HOST
+          value: "mongo"
+        - name: MONGO_PORT
+          value: "27017"
+        - name: MONGO_USERNAME
+          value: "admin"
+        - name: MONGO_PASSWORD
+          value: "admin"
+        - name: KAFKA_BOOTSTRAP_HOST
+          value: "simple-kafka"
+        - name: KAFKA_BOOTSTRAP_PORT
+          value: "9092"
+        - name: SEC_APP_ISSUER
+          value: "com.github.thaiduong"
+        - name: SEC_APP_SECRET
+          value: "%KgaW3?*nRmjcTMP_r6_kXT+g-4qW?CfwFRW%v%RSx4s@dkd2HEuvqPsuW^N*rJbbxLewy?kA&!pN@DH9a7Q$&z4gm-!4TcNjFp2wJe2S82MbWvDb6tjd#JMg^B38bhm"
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: simple-comment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+        app: simple-comment
+  template:
+    metadata:
+      labels:
+        app: simple-comment
+    spec:
+      containers:
+      - name: simple-comment
+        image: thaiduongngo/simple-comment:0.19c
+        ports:
+        - containerPort: 8883
+        env:
+        - name: SPRING_PROFILES_ACTIVE
+          value: "dev"
+        - name: MONGO_HOST
+          value: "mongo"
+        - name: MONGO_PORT
+          value: "27017"
+        - name: MONGO_USERNAME
+          value: "admin"
+        - name: MONGO_PASSWORD
+          value: "admin"
+        - name: KAFKA_BOOTSTRAP_HOST
+          value: "simple-kafka"
+        - name: KAFKA_BOOTSTRAP_PORT
+          value: "9092"
+        - name: SEC_APP_ISSUER
+          value: "com.github.thaiduong"
+        - name: SEC_APP_SECRET
+          value: "%KgaW3?*nRmjcTMP_r6_kXT+g-4qW?CfwFRW%v%RSx4s@dkd2HEuvqPsuW^N*rJbbxLewy?kA&!pN@DH9a7Q$&z4gm-!4TcNjFp2wJe2S82MbWvDb6tjd#JMg^B38bhm"
